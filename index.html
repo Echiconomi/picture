@@ -3,73 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capture IP Example</title>
+    <title>Clickable Images Example</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        h1 {
+            font-family: Arial Rounded MT Bold;
+            font-size: 33px;
+            color: #0F4194;
             text-align: center;
-            margin-top: 50px;
+            margin: 50px 0px 15px;
         }
-        img {
-            cursor: pointer;
-            width: 600px; /* Adjust size as needed */
-            border: 2px solid #000;
-            border-radius: 10px;
+
+        .laptop {
+            width: 1024px;
+            height: 661px;
+            background: url('http://mlamannadev.com/Images/Laptop2.png');
+            background-repeat: no-repeat;
+            background-position: top left;
+            background-size: contain;
+            z-index: 4;
+            position: relative; /* Added for positioning of the .report images */
         }
+
+        .report {
+            position: absolute;
+            animation: round 16s infinite;
+            opacity: 0;
+            z-index: -1;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            width: 100%; /* Adjust width as needed */
+        }
+
+        @keyframes round {   
+            25% { opacity: 1; }
+            40% { opacity: 0; }
+        }
+
+        a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        img:nth-child(4) { animation-delay: 0s; }
+        img:nth-child(3) { animation-delay: 4s; }
+        img:nth-child(2) { animation-delay: 8s; }
+        img:nth-child(1) { animation-delay: 12s; }
     </style>
 </head>
 <body>
-    <h1>Click the picture to capture your IP</h1>
-    <img src="https://mediagroup.viyline.net/wp-content/uploads/2022/03/7.jpg" alt="Click Me" id="clickableImage">
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+    <h1>Service Driven, Customer-Centric Solutions,<br> Empowered by Innovation.</h1>
+    
+    <div class="laptop">
+        <a href="http://example.com/report1" target="_blank">
+            <img class="report" src="http://mlamannadev.com/Images/Report1.png" alt="Report 1"/>
+        </a>
         
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCUUabZ_pDb0C1dezzuyBVzP6Ut7XpWo0s",
-            authDomain: "form-e74ab.firebaseapp.com",
-            databaseURL: "https://form-e74ab-default-rtdb.firebaseio.com",
-            projectId: "form-e74ab",
-            storageBucket: "form-e74ab.appspot.com",
-            messagingSenderId: "93811294360",
-            appId: "1:93811294360:web:6bfcd40b7a4fe2524cd0ed",
-            measurementId: "G-GV55PBD71V"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-
-        async function getIpAddress() {
-            try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                return data.ip;
-            } catch (error) {
-                console.error('Error fetching IP address:', error);
-            }
-        }
-
-        function sanitizeIp(ip) {
-            // Replace dots with underscores
-            return ip.replace(/\./g, '_');
-        }
-
-        async function handleImageClick() {
-            const ip = await getIpAddress();
-            if (ip) {
-                const sanitizedIp = sanitizeIp(ip);
-                const ipRef = ref(database, 'ips/' + sanitizedIp);
-                await set(ipRef, {
-                    timestamp: new Date().toISOString()
-                });
-                alert('IP address (' + ip + ') has been recorded.');
-            }
-        }
-
-        document.getElementById('clickableImage').addEventListener('click', handleImageClick);
-    </script>
+        <a href="http://example.com/report2" target="_blank">
+            <img class="report" src="http://mlamannadev.com/Images/Report2.png" alt="Report 2"/>
+        </a>
+        
+        <a href="http://example.com/report3" target="_blank">
+            <img class="report" src="http://mlamannadev.com/Images/Report3.png" alt="Report 3"/>
+        </a>
+        
+        <a href="http://example.com/report2" target="_blank">
+            <img class="report" src="http://mlamannadev.com/Images/Report2.png" alt="Report 4"/>
+        </a>
+    </div>
 </body>
 </html>
