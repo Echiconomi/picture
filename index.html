@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture IP Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        img {
+            cursor: pointer;
+            width: 300px;
+            border: 2px solid #000;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click the picture to capture your IP</h1>
+    <img src="https://via.placeholder.com/300" alt="Click Me" id="clickableImage">
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+        
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUUabZ_pDb0C1dezzuyBVzP6Ut7XpWo0s",
+            authDomain: "form-e74ab.firebaseapp.com",
+            databaseURL: "https://form-e74ab-default-rtdb.firebaseio.com",
+            projectId: "form-e74ab",
+            storageBucket: "form-e74ab.appspot.com",
+            messagingSenderId: "93811294360",
+            appId: "1:93811294360:web:6bfcd40b7a4fe2524cd0ed",
+            measurementId: "G-GV55PBD71V"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        async function getIpAddress() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                console.error('Error fetching IP address:', error);
+            }
+        }
+
+        async function handleImageClick() {
+            const ip = await getIpAddress();
+            if (ip) {
+                const ipRef = ref(database, 'ips/' + ip);
+                await set(ipRef, {
+                    timestamp: new Date().toISOString()
+                });
+                alert('IP address (' + ip + ') has been recorded.');
+            }
+        }
+
+        document.getElementById('clickableImage').addEventListener('click', handleImageClick);
+    </script>
+</body>
+</html>
