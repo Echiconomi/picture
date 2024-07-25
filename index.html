@@ -1,62 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html style="height: 100%; margin: 0;">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Link</title>
-    <style>
-        /* Reset default browser styles */
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Hide scrollbars */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Full viewport height */
-            background-color: #000; /* Optional: Set a background color */
-        }
-
-        .container {
-            position: relative;
-            width: 100vw; /* Full viewport width */
-            height: 100vh; /* Full viewport height */
-        }
-
-        .image-link {
-            display: block;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .image-link img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Scale image to fit container */
-        }
-
-        .title {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            color: #fff;
-            font-size: 24px;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
-        }
-    </style>
+    <title>Image Display</title>
 </head>
-<body>
-    <div class="container">
-        <a href="http://example.com" class="image-link" target="_blank">
-            <img src="http://mlamannadev.com/Images/Report1.png" alt="Clickable Image"/>
-        </a>
-        <div class="title">Example Image</div>
-    </div>
+<body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f0f0f0;">
+    <img src="https://mediagroup.viyline.net/wp-content/uploads/2022/03/7.jpg" alt="Image" style="max-width: 100%; max-height: 100%;"/>
 </body>
 </html>
-
